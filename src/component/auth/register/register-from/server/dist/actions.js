@@ -50,7 +50,7 @@ function SaveProfile(file) {
             switch (_a.label) {
                 case 0:
                     extention = file.name.split(".").pop();
-                    if (!extention) {
+                    if (extention == undefined) {
                         extention = "png";
                     }
                     storedName = crypto_1.randomUUID() + "." + extention;
@@ -69,7 +69,7 @@ function SaveProfile(file) {
 }
 function RegisterAction(prevState, formData) {
     return __awaiter(this, void 0, void 0, function () {
-        var data, errorResult, profileName, user;
+        var data, errorResult, profileName, profile, user;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -84,7 +84,8 @@ function RegisterAction(prevState, formData) {
                             }];
                     }
                     profileName = "avatar1.png";
-                    if (!data.profile) return [3 /*break*/, 3];
+                    profile = data.profile;
+                    if (!(profile.size > 0 && profile.name !== "undefined")) return [3 /*break*/, 3];
                     return [4 /*yield*/, SaveProfile(data.profile)];
                 case 2:
                     profileName = _a.sent();

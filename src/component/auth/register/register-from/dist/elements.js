@@ -45,9 +45,7 @@ function RgSubmitButton() {
 }
 exports.RgSubmitButton = RgSubmitButton;
 function RgProgile() {
-    return (React.createElement("div", { className: "form-group flex items-center space-x-6" },
-        React.createElement("label", { className: "block" },
-            React.createElement("span", { className: "sr-only" }, "Choose profile photo"),
-            React.createElement("input", { type: "file", name: "profile", id: "profile", accept: "image/png, image/gif, image/jpeg", className: "block w-full text-sm text-slate-500\r\n      file:mr-4 file:py-2 file:px-4\r\n      file:rounded-full file:border-0\r\n      file:text-sm file:font-semibold\r\n      file:bg-violet-50 file:text-violet-700\r\n      hover:file:bg-violet-100\r\n    " }))));
+    return (React.createElement("div", { className: "form-group" },
+        React.createElement("input", { type: "file", name: "profile", id: "profile", accept: "image/png, image/gif, image/jpeg", className: "block w-full text-sm text-slate-500\r\n      file:mr-4 file:py-2 file:px-4\r\n      file:rounded-full file:border-0\r\n      file:text-sm file:font-semibold\r\n      file:bg-violet-50 file:text-violet-700\r\n      hover:file:bg-violet-100 \r\n    " })));
 }
 exports.RgProgile = RgProgile;

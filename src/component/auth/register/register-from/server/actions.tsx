@@ -8,7 +8,7 @@ import { writeFile } from "fs/promises";
 import { randomUUID } from "crypto";
 async function SaveProfile(file: any) {
     let extention = file.name.split(".").pop();
-    if (!extention) {
+    if (extention == undefined) {
         extention = "png";
     }
     const storedName: string = randomUUID() + "." + extention;
@@ -36,7 +36,8 @@ export default async function RegisterAction(prevState: StateType, formData: For
 
     }
     let profileName = "avatar1.png";
-    if (data.profile) {
+    const profile = data.profile as File;
+    if (profile.size>0 && profile.name!=="undefined") {
         profileName = await SaveProfile(data.profile);
     }
     const user = await prisma.user.create({
