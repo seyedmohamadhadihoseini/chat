@@ -36,29 +36,31 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-var FindUserContacts_1 = require("@/services/FindUserContacts");
-var getCurrrentUser_1 = require("@/services/getCurrrentUser");
-var ContactItem_1 = require("./ContactItem");
-var new_user_1 = require("@/component/new_user");
-function ChatApp() {
+exports.middleware = void 0;
+var server_1 = require("next/server");
+var getCurrrentUser_1 = require("./services/getCurrrentUser");
+function middleware(req) {
     return __awaiter(this, void 0, void 0, function () {
-        var currentUser, users, displayUsers;
+        var user, pathname;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, getCurrrentUser_1["default"]()];
                 case 1:
-                    currentUser = _a.sent();
-                    return [4 /*yield*/, FindUserContacts_1["default"](currentUser)];
-                case 2:
-                    users = _a.sent();
-                    displayUsers = users.map(function (user) {
-                        return React.createElement(ContactItem_1["default"], { key: user === null || user === void 0 ? void 0 : user.id, user: user });
-                    });
-                    return [2 /*return*/, React.createElement("div", { className: "chat-list" },
-                            React.createElement(new_user_1["default"], null),
-                            React.createElement("ul", null, displayUsers))];
+                    user = _a.sent();
+                    pathname = req.nextUrl.pathname;
+                    if (pathname.startsWith("/login") || pathname.startsWith("/register")) {
+                        if (user)
+                            return [2 /*return*/, server_1.NextResponse.redirect(new URL("/chat", req.url))];
+                    }
+                    else if (pathname.startsWith("/chat") || pathname.endsWith("/")) {
+                        if (!user)
+                            return [2 /*return*/, server_1.NextResponse.redirect(new URL("/login", req.url))];
+                        else if (pathname.endsWith("/"))
+                            return [2 /*return*/, server_1.NextResponse.redirect(new URL("/chat", req.url))];
+                    }
+                    return [2 /*return*/];
             }
         });
     });
 }
-exports["default"] = ChatApp;
+exports.middleware = middleware;
