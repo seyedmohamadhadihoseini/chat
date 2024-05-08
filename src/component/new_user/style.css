@@ -1,0 +1,7 @@
+.new-user-input{
+    padding: 20px;
+}
+.new-user-form{
+    display: grid;
+    grid-template-rows: 1fr 10fr;
+}

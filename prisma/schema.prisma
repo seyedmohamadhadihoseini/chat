@@ -1,0 +1,53 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./data.sqlite3"
+}
+
+model Chat {
+  id          Int      @id @default(autoincrement())
+  person1 User @relation(name: "person1Chat",fields: [person1Id],references: [id])
+  person1Id Int 
+  person2 User @relation(name: "person2Chat",fields: [person2Id],references: [id])
+  person2Id Int
+  messages Message[]
+  createdDate DateTime @default(now())
+}
+
+model User {
+  id               Int        @id @default(autoincrement())
+  name             String
+  username         String @unique
+  profile          String
+  password         String
+  lastDate DateTime @default(now())
+  sentMessages     Message[]  @relation(name: "SenderMessages")
+  receivedMessages Message[]  @relation(name: "ReceivedMessages")
+  session          Sessions[]
+  person1s Chat[] @relation(name: "person1Chat")
+  person2s Chat[] @relation(name: "person2Chat")
+  createdDate      DateTime   @default(now())
+}
+
+model Message {
+  id          Int      @id @default(autoincrement())
+  text        String   @default("")
+  sender      User     @relation(name: "SenderMessages", fields: [senderId], references: [id])
+  senderId    Int
+  receiver    User     @relation(name: "ReceivedMessages", fields: [receiverId], references: [id])
+  receiverId  Int
+  chat Chat @relation(fields: [chatId],references: [id])
+  chatId Int
+  createdDate DateTime @default(now())
+}
+model Sessions {
+  id String @unique
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+}
