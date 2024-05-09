@@ -17,11 +17,11 @@ export default function ContactDisplay({
     <Link href={`/chat/${contact?.username}`}>
       <li className={`contact-li ${isAct}`}>
         <div className="contact-image">
-          <img
+          <Image
             src={`/users/img/${contact?.profile}`}
             alt="avatar"
             id="contact-avatar"
-            // fill={true}
+            fill={true}
             className="profile rounded-full"
           />
         </div>

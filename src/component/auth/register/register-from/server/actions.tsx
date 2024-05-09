@@ -11,7 +11,8 @@ async function SaveProfile(file: any) {
     if (extention == undefined) {
         extention = "png";
     }
-    const storedName: string = randomUUID() + "." + extention;
+    let newName  = randomUUID().replace("-","");
+    const storedName: string =  newName+ "." + extention;
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
     const pathname = `./public/users/img/${storedName}`;
