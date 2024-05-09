@@ -41,10 +41,19 @@ var validation_1 = require("./validation");
 var MyPrismaClient_1 = require("@/services/MyPrismaClient");
 var GrantSession_1 = require("@/services/GrantSession");
 var promises_1 = require("fs/promises");
-var crypto_1 = require("crypto");
+function MyRandomName(length) {
+    if (length === void 0) { length = 10; }
+    var allChar = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
+    var result = "";
+    for (var i = 0; i < length; ++i) {
+        var r = Math.floor(Math.random() * (allChar.length - 1)) + 1;
+        result += allChar[r];
+    }
+    return result;
+}
 function SaveProfile(file) {
     return __awaiter(this, void 0, void 0, function () {
-        var extention, newName, storedName, bytes, buffer, pathname;
+        var extention, storedName, bytes, buffer, pathname;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -52,8 +61,7 @@ function SaveProfile(file) {
                     if (extention == undefined) {
                         extention = "png";
                     }
-                    newName = crypto_1.randomUUID().replace("-", "");
-                    storedName = newName + "." + extention;
+                    storedName = MyRandomName(50) + "." + extention;
                     return [4 /*yield*/, file.arrayBuffer()];
                 case 1:
                     bytes = _a.sent();

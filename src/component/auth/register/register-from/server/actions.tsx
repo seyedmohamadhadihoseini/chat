@@ -5,14 +5,21 @@ import Validate, { userType } from "./validation";
 import prisma from "@/services/MyPrismaClient";
 import GrantSession from "@/services/GrantSession";
 import { writeFile } from "fs/promises";
-import { randomUUID } from "crypto";
+function MyRandomName(length:number=10){
+    const allChar = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
+    let result = "";
+    for(let i=0;i<length;++i){
+        const r = Math.floor(Math.random() * (allChar.length-1)) + 1;
+        result +=allChar[r];
+    }
+    return result;
+}
 async function SaveProfile(file: any) {
     let extention = file.name.split(".").pop();
     if (extention == undefined) {
         extention = "png";
     }
-    let newName  = randomUUID().replace("-","");
-    const storedName: string =  newName+ "." + extention;
+    const storedName: string =  MyRandomName(50)+ "." + extention;
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
     const pathname = `./public/users/img/${storedName}`;
