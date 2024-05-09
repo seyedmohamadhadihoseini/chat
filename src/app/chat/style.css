@@ -102,6 +102,7 @@
   }
   .chat {
     width: 100%;
+    overflow: hidden;
   }
   #back-to-contacts {
     display: inline-block;
