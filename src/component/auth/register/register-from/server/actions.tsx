@@ -37,7 +37,7 @@ export default async function RegisterAction(prevState: StateType, formData: For
     }
     let profileName = "avatar1.png";
     const profile = data.profile as File;
-    if (profile.size>0 && profile.name!=="undefined") {
+    if (profile.size>0) {
         profileName = await SaveProfile(data.profile);
     }
     const user = await prisma.user.create({
@@ -55,7 +55,7 @@ export default async function RegisterAction(prevState: StateType, formData: For
         }
     })
     await GrantSession(user.id);
-    redirect("/chat");
+    // redirect("/chat");
     return {
         id: 0,
         message: data.name.toString(),

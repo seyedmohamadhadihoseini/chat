@@ -37,7 +37,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-var navigation_1 = require("next/navigation");
 var validation_1 = require("./validation");
 var MyPrismaClient_1 = require("@/services/MyPrismaClient");
 var GrantSession_1 = require("@/services/GrantSession");
@@ -85,7 +84,7 @@ function RegisterAction(prevState, formData) {
                     }
                     profileName = "avatar1.png";
                     profile = data.profile;
-                    if (!(profile.size > 0 && profile.name !== "undefined")) return [3 /*break*/, 3];
+                    if (!(profile.size > 0)) return [3 /*break*/, 3];
                     return [4 /*yield*/, SaveProfile(data.profile)];
                 case 2:
                     profileName = _a.sent();
@@ -111,7 +110,7 @@ function RegisterAction(prevState, formData) {
                     return [4 /*yield*/, GrantSession_1["default"](user.id)];
                 case 6:
                     _a.sent();
-                    navigation_1.redirect("/chat");
+                    // redirect("/chat");
                     return [2 /*return*/, {
                             id: 0,
                             message: data.name.toString(),
