@@ -9,7 +9,7 @@ function ContactItem(_a) {
     if (!profile) {
         profile = "avatar2.png";
     }
-    alert(prefixOfProfile_1["default"]() + "?name=" + (user === null || user === void 0 ? void 0 : user.profile));
+    console.log(prefixOfProfile_1["default"]() + "?name=" + (user === null || user === void 0 ? void 0 : user.profile));
     return React.createElement("li", null,
         React.createElement(link_1["default"], { className: "original-contact-item", href: "/chat/" + (user === null || user === void 0 ? void 0 : user.username) },
             React.createElement("div", { className: "contact-image" },

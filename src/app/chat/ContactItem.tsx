@@ -8,7 +8,7 @@ export default function ContactItem({ user }: { user: User | null }) {
     if (!profile) {
         profile = "avatar2.png";
     }
-    alert(`${prefixOfProfiles()}?name=${user?.profile}`);
+    console.log(`${prefixOfProfiles()}?name=${user?.profile}`);
     return <li >
         <Link className="original-contact-item" href={`/chat/${user?.username}`}>
             <div className="contact-image">
