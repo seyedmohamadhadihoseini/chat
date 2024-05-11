@@ -100,9 +100,14 @@
     display: grid;
     grid-template-columns: 1fr;
   }
-  .chat {
-    width: 100%;
+  .chat *{
     overflow: hidden;
+  }
+  .chat .chat-history{
+    overflow:scroll;
+  }
+  .chat .chat-header{
+    overflow: visible;
   }
   #back-to-contacts {
     display: inline-block;
@@ -112,6 +117,7 @@
   }
   .people-list {
     display: none;
+    overflow: hidden;
   }
   .chat-header {
     display: grid;
@@ -141,5 +147,12 @@
   .original-contact-item .about {
     display: grid;
     grid-template-rows: 1fr 1fr;
+  }
+  .send-part{
+    display:grid;
+    grid-template-columns: 6fr 1fr;
+  }
+  .send-part button{
+    padding:2px;
   }
 }
