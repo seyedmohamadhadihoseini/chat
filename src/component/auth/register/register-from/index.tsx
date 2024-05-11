@@ -13,8 +13,8 @@ export default function RegisterForm() {
     const [errorState, formAction] = useFormState(RegisterAction, { id: 1, message: "" });
     useEffect(() => {
         if (errorState.id === 0) {
-            toast(`welcome ${errorState.message}`);
-            router.push(`/chat/${errorState.user?.username}`);
+            // toast(`welcome ${errorState.message}`);
+            // router.push(`/chat/${errorState.user?.username}`);
         }
         else if (errorState.message != "") {
             toast(errorState.message);
