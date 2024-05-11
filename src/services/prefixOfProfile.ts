@@ -1,3 +1,3 @@
 export default function prefixOfProfiles(){
-    return `/users/img/`;
+    return `${process.env.NEXT_PUBLIC_HOST}/api/getprofile`;
 }

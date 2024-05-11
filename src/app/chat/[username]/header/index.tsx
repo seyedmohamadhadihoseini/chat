@@ -20,7 +20,7 @@ export default async function ChatHeader({ user }: { user: { name: string, id: n
                 <div className="contact-image">
 
                     <Image
-                        src={prefixOfProfiles()+user?.profile}
+                        src={`${prefixOfProfiles()}?name=${user?.profile}`}
                         alt="avatar"
                         fill={true}
                         className="profile rounded-full"

@@ -2,6 +2,7 @@ import { User } from "@/lib/user";
 import DifferentOfTwoTime from "@/services/timeDiff";
 import Image from "next/image";
 import Link from "next/link";
+import  prefixOfProfiles  from '@/services/prefixOfProfile';
 
 export default function ContactDisplay({
   contact,
@@ -18,7 +19,7 @@ export default function ContactDisplay({
       <li className={`contact-li ${isAct}`}>
         <div className="contact-image">
           <Image
-            src={`/users/img/${contact?.profile}`}
+            src={`${prefixOfProfiles()}?name=${contact?.profile}`}
             alt="avatar"
             id="contact-avatar"
             fill={true}

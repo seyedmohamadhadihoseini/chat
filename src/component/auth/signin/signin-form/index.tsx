@@ -14,7 +14,7 @@ export default function SignInForm() {
         
     }, [errorMessage]);
     return (
-        <form method="POST" action={formAction} className="register-form" id="login-form">
+        <form  action={formAction} className="register-form" id="login-form">
             <div className="form-group">
                 <label htmlFor="username"><i className="zmdi zmdi-account material-icons-name"></i></label>
                 <input type="text" name="username" id="username" placeholder="username" />

@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-let sessionPair: { [key: string]: any } = {};
+const sessionPair: { [key: string]: any } = {};
 export default async function GetUser() {
   if (cookies().has("chat_session")) {
     const sessionId = cookies().get("chat_session")?.value;
