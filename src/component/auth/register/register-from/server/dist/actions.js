@@ -37,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
+var navigation_1 = require("next/navigation");
 var validation_1 = require("./validation");
 var MyPrismaClient_1 = require("@/services/MyPrismaClient");
 var GrantSession_1 = require("@/services/GrantSession");
@@ -119,12 +120,8 @@ function RegisterAction(prevState, formData) {
                     return [4 /*yield*/, GrantSession_1["default"](user.id)];
                 case 6:
                     _a.sent();
-                    // redirect("/chat");
-                    return [2 /*return*/, {
-                            id: 0,
-                            message: data.name.toString(),
-                            user: user
-                        }];
+                    navigation_1.redirect("/chat");
+                    return [2 /*return*/];
             }
         });
     });

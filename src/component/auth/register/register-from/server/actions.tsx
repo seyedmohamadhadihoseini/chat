@@ -63,10 +63,10 @@ export default async function RegisterAction(prevState: StateType, formData: For
         }
     })
     await GrantSession(user.id);
-    // redirect("/chat");
-    return {
-        id: 0,
-        message: data.name.toString(),
-        user: user
-    }
+    redirect("/chat");
+    // return {
+    //     id: 0,
+    //     message: data.name.toString(),
+    //     user: user
+    // }
 }

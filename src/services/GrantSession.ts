@@ -4,8 +4,9 @@ import prisma from "./MyPrismaClient";
 
 export default async function GrantSession(userId: any) {
     const sessionVal = randomUUID();
+    const oneMonth = 30*24*60*60*1000;
     cookies().set("chat_session", sessionVal, {
-        httpOnly: true
+        httpOnly: true,expires:Date.now()+oneMonth
     });
     await prisma.sessions.create({
         data: {
@@ -13,5 +14,4 @@ export default async function GrantSession(userId: any) {
             userId
         }
     })
-
 }
