@@ -13,7 +13,7 @@
 # next.js
 /.next/
 /out/
-
+/public/users/img
 # production
 /build
 
