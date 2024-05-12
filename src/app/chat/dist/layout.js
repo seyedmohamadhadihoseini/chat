@@ -36,42 +36,30 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.middleware = void 0;
-var server_1 = require("next/server");
-var getCurrrentUser_1 = require("./services/getCurrrentUser");
-function middleware(req) {
+require("./style.css");
+var contacts_1 = require("./contacts");
+var fetchUsers_1 = require("./contacts/fetchUsers");
+var getCurrrentUser_1 = require("@/services/getCurrrentUser");
+function ChatLayout(_a) {
+    var children = _a.children;
     return __awaiter(this, void 0, void 0, function () {
-        var user, pathname, lastPart, lastUrl;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        var currentUser, users;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
                 case 0: return [4 /*yield*/, getCurrrentUser_1["default"]()];
                 case 1:
-                    user = _a.sent();
-                    pathname = req.nextUrl.pathname;
-                    if (pathname.startsWith("/login") || pathname.startsWith("/register")) {
-                        if (user)
-                            return [2 /*return*/, server_1.NextResponse.redirect(new URL("/chat", req.url))];
+                    currentUser = _b.sent();
+                    if (!currentUser) {
+                        return [2 /*return*/, React.createElement("div", null)];
                     }
-                    else if (pathname.startsWith("/chat")) {
-                        if (!user) {
-                            lastPart = pathname.split("/").pop();
-                            lastUrl = "/login";
-                            if (lastPart !== "chat") {
-                                lastUrl = "/login?target=" + lastPart;
-                            }
-                            return [2 /*return*/, server_1.NextResponse.redirect(new URL(lastUrl, req.url))];
-                        }
-                        else if (pathname.endsWith("/"))
-                            return [2 /*return*/, server_1.NextResponse.redirect(new URL("/chat", req.url))];
-                    }
-                    else if (pathname.endsWith("/")) {
-                        if (user) {
-                            return [2 /*return*/, server_1.NextResponse.redirect(new URL("/chat", req.url))];
-                        }
-                    }
-                    return [2 /*return*/];
+                    return [4 /*yield*/, fetchUsers_1["default"](currentUser.id)];
+                case 2:
+                    users = _b.sent();
+                    return [2 /*return*/, (React.createElement("div", { className: "main-container" },
+                            React.createElement(contacts_1["default"], { users: users }),
+                            children))];
             }
         });
     });
 }
-exports.middleware = middleware;
+exports["default"] = ChatLayout;

@@ -5,12 +5,12 @@ import RegisterAction from "./server/actions";
 import { useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function RegisterForm() {
-
+    const target = useSearchParams().get("target");
     const router = useRouter();
-    const [errorState, formAction] = useFormState(RegisterAction, { id: 1, message: "" });
+    const [errorState, formAction] = useFormState(RegisterAction, {target, id: 1, message: "" });
     useEffect(() => {
         if (errorState.id === 0) {
             // toast(`welcome ${errorState.message}`);

@@ -20,7 +20,7 @@ export default async function CheckLogin(prevState: any, formData: FormData) {
     if (user) {
         if (user.password.toString() == password) {
             await GrantSession(user.id);
-            return redirect(`/chat/${user.username}`);
+            return redirect(`/chat/${prevState.target||""}`);
         }
         else {
             errorMessage = "password is not correct";
@@ -31,7 +31,7 @@ export default async function CheckLogin(prevState: any, formData: FormData) {
     }
     id += 1;
     return {
-        message: errorMessage, id
+        message: errorMessage, id,target:prevState.target
     };
 
 

@@ -19,8 +19,9 @@ io.on("connection", (socket) => {
     socket.emit(`${receiverId}new message`, senderId);
   });
 
-  socket.on("messagefrom", (senderId, receiverId) => {
-    socket.broadcast.emit(`${senderId}=>${receiverId}`,1);
+  socket.on("messagefrom", (senderId,receiverId,messageId) => {
+    socket.broadcast.emit(`${senderId}=>${receiverId}`,messageId);
+    // socket.broadcast.emit(`${senderId}=>${receiverId}`,1);
   });
   socket.on("new message2", (receiverId, text) => {
     console.log(text);

@@ -9,8 +9,9 @@ var react_toastify_1 = require("react-toastify");
 require("react-toastify/dist/ReactToastify.css");
 var navigation_1 = require("next/navigation");
 function RegisterForm() {
+    var target = navigation_1.useSearchParams().get("target");
     var router = navigation_1.useRouter();
-    var _a = react_dom_1.useFormState(actions_1["default"], { id: 1, message: "" }), errorState = _a[0], formAction = _a[1];
+    var _a = react_dom_1.useFormState(actions_1["default"], { target: target, id: 1, message: "" }), errorState = _a[0], formAction = _a[1];
     react_1.useEffect(function () {
         if (errorState.id === 0) {
             // toast(`welcome ${errorState.message}`);

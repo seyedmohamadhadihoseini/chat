@@ -11,8 +11,8 @@ export default function Send({ chat, myId, itsId }: { chat: ChatType|null, myId:
   const socket = io(process.env.NEXT_PUBLIC_SOCKET_HOST?.toString() || "");
   const router = useRouter();
   const SendHandler = async () => {
-    await SendMessage({ chatId: chat?.id, text: txt, senderId: myId, receiverId: itsId });
-    socket.emit("messagefrom", myId, itsId);
+    const messageId :number= await SendMessage({ chatId: chat?.id, text: txt, senderId: myId, receiverId: itsId });
+    socket.emit("messagefrom", myId, itsId,messageId);
     setText("");
     router.refresh();
   }

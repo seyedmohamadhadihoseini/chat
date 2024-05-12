@@ -6,8 +6,10 @@ var react_dom_1 = require("react-dom");
 var loginCheck_1 = require("../server/loginCheck");
 var react_toastify_1 = require("react-toastify");
 require("react-toastify/dist/ReactToastify.css");
+var navigation_1 = require("next/navigation");
 function SignInForm() {
-    var _a = react_dom_1.useFormState(loginCheck_1["default"], { message: "", id: 0 }), errorMessage = _a[0], formAction = _a[1];
+    var target = navigation_1.useSearchParams().get("target");
+    var _a = react_dom_1.useFormState(loginCheck_1["default"], { target: target, message: "", id: 0 }), errorMessage = _a[0], formAction = _a[1];
     react_1.useEffect(function () {
         if ((errorMessage === null || errorMessage === void 0 ? void 0 : errorMessage.message) != "") {
             react_toastify_1.toast(errorMessage === null || errorMessage === void 0 ? void 0 : errorMessage.message);

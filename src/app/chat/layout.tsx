@@ -1,7 +1,6 @@
 import "./style.css";
 import Contacts from "./contacts";
 import fetchUsers from "./contacts/fetchUsers";
-import { User } from "@/lib/user";
 import GetCurrentUser  from '@/services/getCurrrentUser';
 
 export default async function ChatLayout({

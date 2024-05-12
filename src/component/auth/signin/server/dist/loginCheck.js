@@ -1,3 +1,4 @@
+"use server";
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -36,42 +37,50 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.middleware = void 0;
-var server_1 = require("next/server");
-var getCurrrentUser_1 = require("./services/getCurrrentUser");
-function middleware(req) {
+var MyPrismaClient_1 = require("@/services/MyPrismaClient");
+var navigation_1 = require("next/navigation");
+var GrantSession_1 = require("@/services/GrantSession");
+var id = 0;
+function CheckLogin(prevState, formData) {
     return __awaiter(this, void 0, void 0, function () {
-        var user, pathname, lastPart, lastUrl;
+        var data, inputUsername, password, isRemember, user, errorMessage;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, getCurrrentUser_1["default"]()];
+                case 0:
+                    data = Object.fromEntries(formData);
+                    inputUsername = data.username.toString();
+                    password = data.password.toString();
+                    isRemember = data["remember-me"] ? true : false;
+                    return [4 /*yield*/, MyPrismaClient_1["default"].user.findFirst({
+                            where: {
+                                username: inputUsername
+                            }
+                        })];
                 case 1:
                     user = _a.sent();
-                    pathname = req.nextUrl.pathname;
-                    if (pathname.startsWith("/login") || pathname.startsWith("/register")) {
-                        if (user)
-                            return [2 /*return*/, server_1.NextResponse.redirect(new URL("/chat", req.url))];
-                    }
-                    else if (pathname.startsWith("/chat")) {
-                        if (!user) {
-                            lastPart = pathname.split("/").pop();
-                            lastUrl = "/login";
-                            if (lastPart !== "chat") {
-                                lastUrl = "/login?target=" + lastPart;
-                            }
-                            return [2 /*return*/, server_1.NextResponse.redirect(new URL(lastUrl, req.url))];
-                        }
-                        else if (pathname.endsWith("/"))
-                            return [2 /*return*/, server_1.NextResponse.redirect(new URL("/chat", req.url))];
-                    }
-                    else if (pathname.endsWith("/")) {
-                        if (user) {
-                            return [2 /*return*/, server_1.NextResponse.redirect(new URL("/chat", req.url))];
-                        }
-                    }
-                    return [2 /*return*/];
+                    errorMessage = "";
+                    if (!user) return [3 /*break*/, 5];
+                    if (!(user.password.toString() == password)) return [3 /*break*/, 3];
+                    return [4 /*yield*/, GrantSession_1["default"](user.id)];
+                case 2:
+                    _a.sent();
+                    return [2 /*return*/, navigation_1.redirect("/chat/" + (prevState.target || ""))];
+                case 3:
+                    errorMessage = "password is not correct";
+                    _a.label = 4;
+                case 4: return [3 /*break*/, 6];
+                case 5:
+                    errorMessage = "user not exist";
+                    _a.label = 6;
+                case 6:
+                    id += 1;
+                    return [2 /*return*/, {
+                            message: errorMessage,
+                            id: id,
+                            target: prevState.target
+                        }];
             }
         });
     });
 }
-exports.middleware = middleware;
+exports["default"] = CheckLogin;

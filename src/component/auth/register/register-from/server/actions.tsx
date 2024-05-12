@@ -27,6 +27,7 @@ async function SaveProfile(file: any) {
     return storedName;
 }
 interface StateType {
+    target:string|null,
     id: number,
     message: string
 }
@@ -39,7 +40,7 @@ export default async function RegisterAction(prevState: StateType, formData: For
     if (errorResult != "") {
         return {
             id: prevState.id + 1,
-            message: errorResult
+            message: errorResult,target:prevState.target
         }
 
     }
@@ -63,7 +64,7 @@ export default async function RegisterAction(prevState: StateType, formData: For
         }
     })
     await GrantSession(user.id);
-    redirect("/chat");
+    redirect(`/chat/${prevState.target||""}`);
     // return {
     //     id: 0,
     //     message: data.name.toString(),

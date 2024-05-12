@@ -4,8 +4,10 @@ import { useFormState } from "react-dom";
 import CheckLogin from "../server/loginCheck";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { useSearchParams } from "next/navigation";
 export default function SignInForm() {
-    const [errorMessage, formAction] = useFormState(CheckLogin, { message: "", id: 0 });
+    const target = useSearchParams().get("target");
+    const [errorMessage, formAction] = useFormState(CheckLogin, {target:target, message: "", id: 0 });
     useEffect(() => {
 
         if (errorMessage?.message != "") {

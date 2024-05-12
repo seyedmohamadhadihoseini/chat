@@ -3,17 +3,24 @@ import "$public/register/css/style.css";
 import Avatar from "./Avatar";
 import SocialLogin from "./SocialLogin";
 import SignInForm from "./signin-form";
+import { headers } from "next/headers";
+import { Suspense } from "react";
 export default function SignIn() {
+
     return (
         <section className="sign-in">
             <div className="container">
                 <div className="signin-content" style={{ marginTop: 1 + "%" }}>
-                    <Avatar />
+                    <Suspense>
+                        <Avatar />
+                    </Suspense>
 
                     <div className="signin-form">
                         <h2 className="form-title">Sign in</h2>
-                        <SignInForm/>
-                        <SocialLogin/>
+                        <Suspense>
+                            <SignInForm />
+                        </Suspense>
+                        <SocialLogin />
                     </div>
                 </div>
             </div>

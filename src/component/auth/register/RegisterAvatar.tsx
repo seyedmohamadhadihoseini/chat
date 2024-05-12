@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function RegisterAvatar() {
     return (
@@ -8,7 +9,7 @@ export default function RegisterAvatar() {
                     alt="sing up image" width={300} height={400}
                 />
             </figure>
-            <a href="/login" className="signup-image-link">I am already member</a>
+            <Link href="/login" className="signup-image-link">I am already member</Link>
         </div>
     );
 }

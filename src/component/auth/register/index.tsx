@@ -2,6 +2,7 @@ import "$public/register/fonts/material-icon/css/material-design-iconic-font.min
 import "$public/register/css/style.css";
 import RegisterAvatar from "./RegisterAvatar";
 import RegisterForm from "./register-from";
+import { Suspense } from "react";
 export default function Register()
 {
     return (
@@ -10,7 +11,10 @@ export default function Register()
                 <div className="signup-content">
                     <div className="signup-form">
                         <h2 className="form-title">Sign up</h2>
+                        <Suspense>
+                            
                         <RegisterForm/>
+                        </Suspense>
                     </div>
                     <RegisterAvatar/>
                 </div>

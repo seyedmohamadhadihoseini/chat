@@ -89,7 +89,7 @@ function RegisterAction(prevState, formData) {
                     if (errorResult != "") {
                         return [2 /*return*/, {
                                 id: prevState.id + 1,
-                                message: errorResult
+                                message: errorResult, target: prevState.target
                             }];
                     }
                     profileName = "avatar1.png";
@@ -120,7 +120,7 @@ function RegisterAction(prevState, formData) {
                     return [4 /*yield*/, GrantSession_1["default"](user.id)];
                 case 6:
                     _a.sent();
-                    navigation_1.redirect("/chat");
+                    navigation_1.redirect("/chat/" + (prevState.target || ""));
                     return [2 /*return*/];
             }
         });
