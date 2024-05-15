@@ -24,8 +24,8 @@
   grid-template-rows: 1fr 50fr 10fr;
 }
 .send-part {
-  position: absolute;
-  bottom: 0;
+  /* position: absolute;
+  bottom: 0; */
   width: 100%;
   height: 50px;
   display: grid;
@@ -100,15 +100,15 @@
     display: grid;
     grid-template-columns: 1fr;
   }
-  .chat *{
+  .chat .all-send{
     overflow: hidden;
   }
   .chat .chat-history{
     overflow:scroll;
   }
-  .chat .chat-header{
+  /* .chat .chat-header{
     overflow: visible;
-  }
+  } */
   #back-to-contacts {
     display: inline-block;
     width: 50%;

@@ -3,7 +3,6 @@ import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
     const sessionVal = request.nextUrl.searchParams.get("sessionId");
-
     const session = await prisma.sessions.findUnique({
         where: {
             id: sessionVal?.toString()

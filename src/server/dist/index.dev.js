@@ -18,18 +18,11 @@ var io = new Server(server, {
   }
 });
 io.on("connection", function (socket) {
-  socket.on("chat message", function (msg) {
-    console.log("message: " + msg);
-  });
-  socket.on("new message", function (senderId, receiverId) {
-    socket.emit("".concat(receiverId, "new message"), senderId);
-  });
   socket.on("messagefrom", function (senderId, receiverId, messageId) {
-    socket.broadcast.emit("".concat(senderId, "=>").concat(receiverId), messageId); // socket.broadcast.emit(`${senderId}=>${receiverId}`,1);
+    socket.broadcast.emit("".concat(senderId, "=>").concat(receiverId), messageId);
   });
-  socket.on("new message2", function (receiverId, text) {
-    console.log(text);
-    socket.broadcast.emit("".concat(receiverId, "new message2"), text);
+  socket.on("removeMessage", function (senderId, receiverId, messageId) {
+    socket.broadcast.emit("".concat(senderId, "Remove").concat(receiverId), messageId);
   });
 });
 server.listen(3002, function () {

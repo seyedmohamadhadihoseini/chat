@@ -2,6 +2,10 @@
 exports.__esModule = true;
 exports.viewport = exports.metadata = void 0;
 require("./globals.css");
+require("@fontsource/roboto/300.css");
+require("@fontsource/roboto/400.css");
+require("@fontsource/roboto/500.css");
+require("@fontsource/roboto/700.css");
 var APP_NAME = "SeyedGram";
 var APP_DEFAULT_TITLE = "HadiGram";
 var APP_TITLE_TEMPLATE = "%s - SeyedGram";

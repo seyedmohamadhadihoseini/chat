@@ -3,6 +3,8 @@ export default interface MessageType{
     text:string,
     senderId:number,
     receiverId:number,
+    replayId:number|null,
+    isRemoved:boolean
     chatId:number,
     createdDate:Date
 }

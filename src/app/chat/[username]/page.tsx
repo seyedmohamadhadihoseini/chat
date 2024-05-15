@@ -4,6 +4,7 @@ import ChatHistory from "./history";
 import Send from "./send/Send";
 import updateLastDate from "@/services/updateLastdate";
 import GetCurrentUser from "@/services/getCurrrentUser";
+import "./style.css";
 export default async function ChatPage({ params }: { params: { username: string } }) {
     const username = params.username;
     const currentUser = await GetCurrentUser();
@@ -13,10 +14,10 @@ export default async function ChatPage({ params }: { params: { username: string 
             username: username
         },
         select: {
-            id: true,lastDate:true,name:true,profile:true
+            id: true, lastDate: true, name: true, profile: true
         }
     });
-    if(!targetUser){
+    if (!targetUser) {
         return <div>user not exist</div>
     }
 
@@ -44,9 +45,9 @@ export default async function ChatPage({ params }: { params: { username: string 
     // }
     return (
         <div className="chat">
-                <ChatHeader user={targetUser} />
-                <ChatHistory chat={chat} user={currentUser} itsId={targetUser?.id||0} />
-                <Send  chat={chat} myId={currentUser?.id} itsId={userId}/>
+            <ChatHeader user={targetUser} />
+            <ChatHistory chat={chat} user={currentUser} itsId={targetUser?.id || 0} />
+            <Send chat={chat} myId={currentUser?.id} itsId={userId} />
         </div>
     )
 }

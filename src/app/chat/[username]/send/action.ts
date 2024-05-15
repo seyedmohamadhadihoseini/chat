@@ -7,11 +7,13 @@ export default async function SendMessage({
   senderId,
   receiverId,
   chatId,
+  replyId
 }: {
   text: string;
   senderId: number|undefined;
   receiverId: number;
   chatId: number | undefined;
+  replyId:number|null
 }) {
   let newChatId = chatId || (await createChat(senderId, receiverId));
 
@@ -21,9 +23,10 @@ export default async function SendMessage({
       senderId:senderId||0,
       receiverId,
       chatId: newChatId,
+      replayId:replyId
     },
   });
-  return message.id;
+  return message;
 }
 async function createChat(senderId: number|undefined, receiverId: number) {
   const chat = await prisma.chat.create({

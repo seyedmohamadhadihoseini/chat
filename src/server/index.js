@@ -1,4 +1,4 @@
-process.env.NODE_ENV ="production";
+process.env.NODE_ENV = "production";
 const express = require("express");
 const { createServer } = require("node:http");
 const { Server } = require("socket.io");
@@ -11,22 +11,12 @@ const io = new Server(server, {
   },
 });
 io.on("connection", (socket) => {
-  socket.on("chat message", (msg) => {
-    console.log("message: " + msg);
+  socket.on("messagefrom", (senderId, receiverId, messageId) => {
+    socket.broadcast.emit(`${senderId}=>${receiverId}`, messageId);
   });
-
-  socket.on("new message", (senderId, receiverId) => {
-    socket.emit(`${receiverId}new message`, senderId);
-  });
-
-  socket.on("messagefrom", (senderId,receiverId,messageId) => {
-    socket.broadcast.emit(`${senderId}=>${receiverId}`,messageId);
-    // socket.broadcast.emit(`${senderId}=>${receiverId}`,1);
-  });
-  socket.on("new message2", (receiverId, text) => {
-    console.log(text);
-    socket.broadcast.emit(`${receiverId}new message2`, text);
-  });
+  socket.on("removeMessage",(senderId, receiverId, messageId)=>{
+    socket.broadcast.emit(`${senderId}Remove${receiverId}`,messageId);
+  })
 });
 
 server.listen(3002, () => {
