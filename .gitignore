@@ -9,7 +9,7 @@
 /prisma/data.sqlite3
 # testing
 /coverage
-
+.env
 # next.js
 /.next/
 /out/
