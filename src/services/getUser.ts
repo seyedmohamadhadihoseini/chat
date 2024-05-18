@@ -7,8 +7,8 @@ export default async function GetUser() {
       return sessionPair[sessionId || ""];
     }
     const user = await fetch(
-      `${process.env.HOST}/currentuser?sessionId=${sessionId}`,
-      { cache: "force-cache" }
+      `${process.env.NEXT_PUBLIC_HOST}/currentuser?sessionId=${sessionId}`,
+      {  }
     );
     
     sessionPair[sessionId || ""] = JSON.parse(await user.text());

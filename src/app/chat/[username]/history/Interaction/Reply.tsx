@@ -6,6 +6,7 @@ import MyBroker from "@/broker/MyBroker";
 export default function ReplyItem({ handleClose,message }: { handleClose: any,message:MessageType }) {
     return <MenuItem onClick={e=>{
         (MyBroker.get("reply"))(message);
+        (MyBroker.get("focusinput"))();
         handleClose(e);
     }}>
         <ListItemIcon>

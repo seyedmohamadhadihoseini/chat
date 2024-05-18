@@ -22,12 +22,14 @@ export default function HistoryItem({ message, isMine }: { message: MessageType,
   };
   const currentDate = message.createdDate;
   return <li className="message-li" id={`${message.id}`}>
-    {(replyMessage?.id && (!replyMessage.isRemoved)) ?<Link href={`#${replyMessage?.id}`} className="reply-link" onClick={e=>{
+    {(replyMessage?.id && (!replyMessage.isRemoved)) ?<Link href={`#${replyMessage?.id}`} 
+    className={`reply-link ${isMine?"":"float-end"}` }
+    onClick={e=>{
       const temp = document.getElementById(`${replyMessage?.id}`)!.style.backgroundColor;
       document.getElementById(`${replyMessage?.id}`)!.style.backgroundColor = "rgba(50,50,200,0.2)";
       setTimeout(() => {
         document.getElementById(`${replyMessage?.id}`)!.style.backgroundColor = temp;
-      }, 300);
+      }, 500);
     }}>{replyMessage?.text.substring(0,Math.min(replyMessage.text.length,20))}...</Link>:""}
     <p className={isMine ? "bg-slate-500" : "float-end bg-orange-500"}
       onClick={handleClick}

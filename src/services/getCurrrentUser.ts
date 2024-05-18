@@ -1,7 +1,7 @@
-// import { cookies } from "next/headers";
-// import prisma from "./MyPrismaClient";
 import GetUser from "./getUser";
 import { User } from "@/lib/user";
+import { cookies } from "next/headers";
+
 
 export default async function getCurrentUser() {
 
@@ -19,19 +19,20 @@ export default async function getCurrentUser() {
         username:user.username
     }
     return result;
-//   const sessionVal = cookies().get("chat_session")?.value;
-//   const session = await prisma.sessions.findFirst({
-//     where: {
-//       value: sessionVal?.toString(),
-//     },
-//   });
-//   if (sessionVal && session) {
-//     const user = await prisma.user.findFirst({
-//       where: {
-//         id: session.userId,
-//       },
-//     });
-//     return user;
-//   }
-//   return null;
+    // const sessionVal = cookies().get("chat_session")?.value;
+    
+    // const session = await prisma.sessions.findUnique({
+    //     where: {
+    //         id: sessionVal?.toString(),
+    //     }
+    // });
+    // if (sessionVal && session) {
+    //     const user = await prisma.user.findUnique({
+    //         where: {
+    //             id: session.userId,
+    //         },
+    //     });
+    //     return user;
+    // }
+    // return null;
 }

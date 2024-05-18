@@ -24,3 +24,9 @@ export async function middleware(req: NextRequest) {
     }   
   }
 }
+export const config = {
+  unstable_allowDynamic:[
+    "/services/**" ,
+    '/node_modules/function-bind/**',
+  ]
+}

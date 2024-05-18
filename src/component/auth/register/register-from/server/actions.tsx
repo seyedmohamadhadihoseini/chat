@@ -5,15 +5,8 @@ import Validate, { userType } from "./validation";
 import prisma from "@/services/MyPrismaClient";
 import GrantSession from "@/services/GrantSession";
 import { writeFile } from "fs/promises";
-function MyRandomName(length:number=10){
-    const allChar = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
-    let result = "";
-    for(let i=0;i<length;++i){
-        const r = Math.floor(Math.random() * (allChar.length-1)) + 1;
-        result +=allChar[r];
-    }
-    return result;
-}
+import MyRandomName from "@/services/RandomName";
+
 async function SaveProfile(file: any) {
     let extention = file.name.split(".").pop();
     if (extention == undefined) {

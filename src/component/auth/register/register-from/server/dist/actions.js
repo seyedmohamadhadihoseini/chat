@@ -42,16 +42,7 @@ var validation_1 = require("./validation");
 var MyPrismaClient_1 = require("@/services/MyPrismaClient");
 var GrantSession_1 = require("@/services/GrantSession");
 var promises_1 = require("fs/promises");
-function MyRandomName(length) {
-    if (length === void 0) { length = 10; }
-    var allChar = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
-    var result = "";
-    for (var i = 0; i < length; ++i) {
-        var r = Math.floor(Math.random() * (allChar.length - 1)) + 1;
-        result += allChar[r];
-    }
-    return result;
-}
+var RandomName_1 = require("@/services/RandomName");
 function SaveProfile(file) {
     return __awaiter(this, void 0, void 0, function () {
         var extention, storedName, bytes, buffer, pathname;
@@ -62,7 +53,7 @@ function SaveProfile(file) {
                     if (extention == undefined) {
                         extention = "png";
                     }
-                    storedName = MyRandomName(50) + "." + extention;
+                    storedName = RandomName_1["default"](50) + "." + extention;
                     return [4 /*yield*/, file.arrayBuffer()];
                 case 1:
                     bytes = _a.sent();
