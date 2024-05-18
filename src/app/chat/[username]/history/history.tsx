@@ -16,9 +16,10 @@ export default function ChatHistoryMessages({ messages, userId, itsId }: { messa
         return <HistoryItem isMine={userId == message.senderId} key={message.id} message={message} />
     })
     const addNewMessage = (message: MessageType | null) => {
-        const defaultMessage = { chatId: 0, createdDate: new Date(), id: 0, receiverId: 0, senderId: 0, text: "", replayId: null, isRemoved: false };
-        messages.push(message || defaultMessage);
-        setState(state => !state);
+        if (message) {
+            messages.push(message);
+            setState(state => !state);
+        }
     }
     const removeMessage = (messageId: number) => {
         let index = -1;

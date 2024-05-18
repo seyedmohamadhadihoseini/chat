@@ -12,5 +12,6 @@ export default async function getNewMessage(messageId:number|undefined) {
             id:messageId
         }
     });
+   
     return message;
 }

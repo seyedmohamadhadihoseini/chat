@@ -26,6 +26,7 @@ export default function Send({ chat, myId, itsId }: { chat: ChatType | null, myI
   useLayoutEffect(() => {
     MyBroker.set("reply", ReplyFunction);
     MyBroker.set("focusinput", FocusInput);
+    MyBroker.set("sendmessagelive",SendMessageLive);
   }, [])
   const [isReplyed, setIsReplyed] = useState(false);
   const socket = io(process.env.NEXT_PUBLIC_SOCKET_HOST?.toString() || "");
@@ -34,18 +35,25 @@ export default function Send({ chat, myId, itsId }: { chat: ChatType | null, myI
   const SendHandler = async () => {
     const textContent = txt;
     setText("");
-    const newMessage: MessageType = await SendMessage({ chatId: chat?.id, text: textContent, senderId: myId, receiverId: itsId, replyId: replyMessage.id > 0 ? replyMessage.id : null });
+    const newMessage: MessageType | null = await SendMessage({ chatId: chat?.id, text: textContent, senderId: myId, receiverId: itsId, replyId: replyMessage.id > 0 ? replyMessage.id : null });
+    if (newMessage) {
+      SendMessageLive(newMessage);
+    }
+  }
+  const SendMessageLive = (newMessage: MessageType) => {
     socket.emit("messagefrom", myId, itsId, newMessage.id);
     setIsReplyed(false);
     setReplyMessage({ id: 0, txt: "" });
     (MyBroker.get("addmessage"))(newMessage);
   }
+
+
   return (
     <div className="all-send">
       <Send_Reply isReplyed={isReplyed} replyMessageText={replyMessage.txt} setIsReplyed={setIsReplyed} setReplyMessage={setReplyMessage} />
       <div className="send-part">
-        <Send_TextArea  SendHandler={SendHandler} setText={setText} txt={txt} />
-        <Send_Voice/>
+        <Send_TextArea SendHandler={SendHandler} setText={setText} txt={txt} />
+        <Send_Voice myId={myId || 0} itsId={itsId} chatId={chat?.id||null} replyId={replyMessage.id > 0 ? replyMessage.id : null} />
         <Send_Button SendHandler={SendHandler} />
       </div>
     </div>

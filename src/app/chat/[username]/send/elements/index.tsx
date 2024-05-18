@@ -38,6 +38,8 @@ export function Send_TextArea({ setText, txt, SendHandler }: { setText: Function
 }
 import ReplyIcon from '@mui/icons-material/Reply';
 import CloseIcon from '@mui/icons-material/Close';
+import { SendVoiceAction } from "../action";
+import MyBroker from "@/broker/MyBroker";
 export function Send_Reply({ isReplyed, replyMessageText, setIsReplyed, setReplyMessage }:
     { isReplyed: boolean, replyMessageText: string, setIsReplyed: Function, setReplyMessage: Function }
 ) {
@@ -60,21 +62,27 @@ export function Send_Reply({ isReplyed, replyMessageText, setIsReplyed, setReply
     </>
 }
 
-export function Send_Voice() {
+export function Send_Voice({ myId, itsId, chatId, replyId }:
+    {
+        myId: number, itsId: number,
+        chatId: number | null,
+        replyId: number | null
+    }) {
     const addAudioElement = async (blob: Blob) => {
-        console.log(blob);
-        const url = URL.createObjectURL(blob);
-        const audio = document.createElement("audio");
-        audio.src = url;
-        audio.controls = true;
-        document.body.appendChild(audio);
         const voiceForm = new FormData();
         voiceForm.set("voice", blob);
+
         fetch("/api/storevoice", {
             method: "post",
             body: voiceForm
         }).then(r => {
-            console.log(r);
+            r.text().then(async (txt) => {
+                const filename = JSON.parse(txt).filename;
+                const newMessage = await SendVoiceAction(filename, myId, itsId, chatId, replyId);
+                if (newMessage) {
+                    (MyBroker.get("sendmessagelive"))(newMessage);
+                }
+            })
         })
 
     };

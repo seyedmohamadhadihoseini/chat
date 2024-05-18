@@ -9,8 +9,9 @@ export async function POST(request:Request) {
     let storedName = `${MyRandomName(50)}.webm`;
     const pathname = `./public/users/voice/${storedName}`;
     await writeFile(pathname, buffer);
+    
     return Response.json({
-        message:"thanks",
+        filename:storedName,
         success:true
     })
 }
