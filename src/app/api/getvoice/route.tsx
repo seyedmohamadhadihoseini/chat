@@ -13,6 +13,6 @@ export async function GET(request: NextRequest) {
     catch{
     }
     const response = new NextResponse(imageBuffer);
-    response.headers.set("content-type", "audio/webm");
+    response.headers.set("content-type", "audio/mpeg");
     return response;
 }
