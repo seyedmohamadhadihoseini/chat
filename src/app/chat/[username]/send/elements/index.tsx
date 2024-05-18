@@ -1,3 +1,4 @@
+import { AudioRecorder } from "react-audio-voice-recorder";
 
 export function Send_Button({ SendHandler }: { SendHandler: Function }) {
 
@@ -58,13 +59,9 @@ export function Send_Reply({ isReplyed, replyMessageText, setIsReplyed, setReply
         </div> : <div></div>}
     </>
 }
-import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
-import MicIcon from '@mui/icons-material/Mic';
-import { ListItemIcon } from '@mui/material';
-import { Timer } from "timer-node";
-import { useState } from 'react';
+
 export function Send_Voice() {
-    const addAudioElement = async (blob: Blob | undefined) => {
+    const addAudioElement = async (blob: Blob) => {
         console.log(blob);
         const url = URL.createObjectURL(blob);
         const audio = document.createElement("audio");
@@ -79,9 +76,9 @@ export function Send_Voice() {
         }).then(r => {
             console.log(r);
         })
-        
+
     };
-    
+
     return <AudioRecorder
         onRecordingComplete={addAudioElement}
         audioTrackConstraints={{
