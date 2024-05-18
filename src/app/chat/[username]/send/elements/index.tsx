@@ -78,10 +78,11 @@ export function Send_Voice({ myId, itsId, chatId, replyId }:
         }).then(r => {
             r.text().then(async (txt) => {
                 const filename = JSON.parse(txt).filename;
-                const newMessage = await SendVoiceAction(filename, myId, itsId, chatId, replyId);
-                if (newMessage) {
-                    (MyBroker.get("sendmessagelive"))(newMessage);
-                }
+                SendVoiceAction(filename, myId, itsId, chatId, replyId).then(newMessage => {
+                    if (newMessage) {
+                        (MyBroker.get("sendmessagelive"))(newMessage);
+                    }
+                });
             })
         })
 
