@@ -1,6 +1,7 @@
 import MyRandomName from "@/services/RandomName";
 import { writeFile } from "fs/promises";
-export async function POST(request:Request) {
+import { NextRequest } from "next/server";
+export async function POST(request:NextRequest) {
     const data = await request.formData();
     const file = data.get('voice') as Blob;
         

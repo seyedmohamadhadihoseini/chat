@@ -67,7 +67,7 @@
   margin: 10px;
   display: block;
 }
-.message-li p {
+.message-li div {
   width: fit-content;
   color: black;
   padding: 10px 20px;

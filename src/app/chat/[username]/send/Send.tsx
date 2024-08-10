@@ -41,10 +41,10 @@ export default function Send({ chat, myId, itsId }: { chat: ChatType | null, myI
     }
   }
   const SendMessageLive = (newMessage: MessageType) => {
-    socket.emit("messagefrom", myId, itsId, newMessage.id);
     setIsReplyed(false);
     setReplyMessage({ id: 0, txt: "" });
     (MyBroker.get("addmessage"))(newMessage);
+    socket.emit("messagefrom", myId, itsId, newMessage.id);
   }
 
 

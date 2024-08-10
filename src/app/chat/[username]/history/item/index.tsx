@@ -24,17 +24,25 @@ export default function HistoryItem({ message, isMine }: { message: MessageType,
     const handleClose = () => {
         setAnchorEl(null);
     };
+
     const currentDate = message.createdDate;
     let displayShow;
     if (message.category === MessageCategory.text) {
-        displayShow = <Item_Text date={currentDate} messageText={message.text} isMine={isMine} />
+        displayShow = <Item_Text date={currentDate} messageText={message.text} />
     }
     else if (message.category === MessageCategory.voice && message.voice) {
-        displayShow = <Item_Voice src={message.voice} isMine={isMine} />
+        displayShow = <Item_Voice src={message.voice} />
     }
-    return <li className="message-li" id={`${message.id}`}>
-        {(replyMessage?.id && (!replyMessage.isRemoved)) ? <Item_Reply replyMessage={replyMessage} isMine={isMine} /> : ""}
-        <div className={isMine ? "" : "float-end"} onClick={handleClick }>
+    return <li className="message-li" id={`${message.id}`} >
+        <div
+         className={isMine ? "bg-slate-500" : "float-end bg-orange-500"} 
+        //  style={{width:"30%"}}
+         onClick={e=>{
+            alert("clicked");
+            handleClick(e);
+         }}
+         >
+        {(replyMessage?.id && (!replyMessage.isRemoved)) ? <Item_Reply replyMessage={replyMessage} /> : ""}
             {displayShow}
         </div>
 

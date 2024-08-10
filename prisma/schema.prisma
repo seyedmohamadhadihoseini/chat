@@ -6,8 +6,8 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./data.sqlite3"
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
 model Chat {

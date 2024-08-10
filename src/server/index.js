@@ -12,6 +12,7 @@ const io = new Server(server, {
 });
 io.on("connection", (socket) => {
   socket.on("messagefrom", (senderId, receiverId, messageId) => {
+    console.log(`message from ${senderId} to ${receiverId} with id = ${messageId}`)
     socket.broadcast.emit(`${senderId}=>${receiverId}`, messageId);
   });
   socket.on("removeMessage",(senderId, receiverId, messageId)=>{

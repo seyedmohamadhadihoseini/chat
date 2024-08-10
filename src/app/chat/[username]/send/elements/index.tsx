@@ -40,6 +40,8 @@ import ReplyIcon from '@mui/icons-material/Reply';
 import CloseIcon from '@mui/icons-material/Close';
 import { SendVoiceAction } from "../action";
 import MyBroker from "@/broker/MyBroker";
+import MessageType from "@/lib/message";
+import MessageCategory from "@/lib/message/category";
 export function Send_Reply({ isReplyed, replyMessageText, setIsReplyed, setReplyMessage }:
     { isReplyed: boolean, replyMessageText: string, setIsReplyed: Function, setReplyMessage: Function }
 ) {
@@ -71,7 +73,12 @@ export function Send_Voice({ myId, itsId, chatId, replyId }:
     const addAudioElement = async (blob: Blob) => {
         const voiceForm = new FormData();
         voiceForm.set("voice", blob);
-
+        const newMessage:MessageType = {
+            id : Math.random()*9999,
+            category:MessageCategory.voice,
+            text:"",chatId:chatId||0,createdDate:new Date(),isRemoved:false,
+            replayId:replyId,receiverId:itsId,senderId:myId,voice:""
+        }
         fetch("/api/storevoice", {
             method: "post",
             body: voiceForm
