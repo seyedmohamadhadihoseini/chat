@@ -44,7 +44,11 @@ export default function Send({ chat, myId, itsId }: { chat: ChatType | null, myI
     setIsReplyed(false);
     setReplyMessage({ id: 0, txt: "" });
     (MyBroker.get("addmessage"))(newMessage);
-    socket.emit("messagefrom", myId, itsId, newMessage.id);
+    const url = `${process.env.NEXT_PUBLIC_SOCKET_HOST}/send?senderId=${myId}&receiverId=${itsId}&messageId=${newMessage.id}`;
+    console.log(url);
+    fetch(url);
+
+    // socket.emit("messagefrom", myId, itsId, newMessage.id);
   }
 
 
